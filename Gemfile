@@ -56,6 +56,9 @@ gem 'factory_bot_rails'
 # tests ran easily
 gem 'spin'
 
+# error reporting
+gem 'rollbar'
+
 # webserver
 gem 'puma', '~> 3.7'
 
