@@ -11,7 +11,7 @@ class TasksController < ApiController
   api :GET, '/task_lists/:task_list_id/tasks/:id', 'Returns requested task details'
   param :task_list_id, :number
   param :id,           :number
-  def index
+  def show
     render json: task_list.tasks.find(params[:id])
   end
 
@@ -39,7 +39,7 @@ class TasksController < ApiController
   param :task_list_id, :number
   param :id,           :number
   param_group :task
-  def create
+  def update
     if task.update(task_params)
       render json: task, status: 201
     else
