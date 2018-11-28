@@ -18,6 +18,7 @@ class TasksController < ApiController
   def_param_group :task do
     param :task, Hash do
       param :content,       String
+      param :happens_at,    String
       param :list_position, :number, allow_blank: true
     end
   end
@@ -62,7 +63,7 @@ class TasksController < ApiController
   end
 
   def task_params
-    params.require(:task).permit(:content, :list_position)
+    params.require(:task).permit(:content, :happens_at, :list_position)
   end
 
   def task
