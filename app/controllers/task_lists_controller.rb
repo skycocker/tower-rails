@@ -23,6 +23,7 @@ class TaskListsController < ApiController
   param_group :task_list
   def create
     new_list = current_user.task_lists.new(task_list_params)
+    new_list.users << current_user
 
     if new_list.save
       render json: new_list, status: 201
