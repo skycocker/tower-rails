@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   # api resources
   resources :task_lists do
-    resources :tasks
+    resources :tasks do
+      post '/complete',   action: :complete
+      post '/uncomplete', action: :uncomplete
+    end
   end
 end

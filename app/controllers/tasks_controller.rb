@@ -48,6 +48,28 @@ class TasksController < ApiController
     end
   end
 
+  api :POST, '/task_lists/:task_list_id/tasks/:id/complete', 'Marks given task as completed'
+  param :task_list_id, :number
+  param :id,           :number
+  def complete
+    if task.complete!
+      return head(204)
+    else
+      render json: { errors: task.errors }, status: 422
+    end
+  end
+
+  api :POST, '/task_lists/:task_list_id/tasks/:id/uncomplete', 'Marks given task as uncompleted'
+  param :task_list_id, :number
+  param :id,           :number
+  def complete
+    if task.uncomplete!
+      return head(204)
+    else
+      render json: { errors: task.errors }, status: 422
+    end
+  end
+
   api :DELETE, '/task_lists/:task_list_id/tasks/:id', 'Destroys the given task'
   param :task_list_id, :number
   param :id,           :number
