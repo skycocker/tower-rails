@@ -89,6 +89,6 @@ class TasksController < ApiController
   end
 
   def task
-    task_list.tasks.find(params[:id])
+    task_list.tasks.find(params[:id] || params[:task_id])
   end
 end
