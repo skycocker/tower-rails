@@ -48,9 +48,9 @@ class TasksController < ApiController
     end
   end
 
-  api :POST, '/task_lists/:task_list_id/tasks/:id/complete', 'Marks given task as completed'
+  api :POST, '/task_lists/:task_list_id/tasks/:task_id/complete', 'Marks given task as completed'
   param :task_list_id, :number
-  param :id,           :number
+  param :task_id,      :number
   def complete
     if task.complete!
       return head(204)
@@ -59,9 +59,9 @@ class TasksController < ApiController
     end
   end
 
-  api :POST, '/task_lists/:task_list_id/tasks/:id/uncomplete', 'Marks given task as uncompleted'
+  api :POST, '/task_lists/:task_list_id/tasks/:task_id/uncomplete', 'Marks given task as uncompleted'
   param :task_list_id, :number
-  param :id,           :number
+  param :task_id,      :number
   def complete
     if task.uncomplete!
       return head(204)
