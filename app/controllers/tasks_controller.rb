@@ -62,7 +62,7 @@ class TasksController < ApiController
   api :POST, '/task_lists/:task_list_id/tasks/:task_id/uncomplete', 'Marks given task as uncompleted'
   param :task_list_id, :number
   param :task_id,      :number
-  def complete
+  def uncomplete
     if task.uncomplete!
       return head(204)
     else
