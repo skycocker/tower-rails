@@ -7,7 +7,7 @@ class Task < ApplicationRecord
   acts_as_list(
     scope:       :task_list,
     column:      :list_position,
-    add_new_at:  :top,
+    add_new_at:  :bottom,
     top_of_list: 0,
   )
 
