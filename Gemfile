@@ -62,6 +62,9 @@ gem 'rollbar'
 # webserver
 gem 'puma', '~> 3.7'
 
+# reorderable/sortable lists
+gem 'acts_as_list'
+
 group :development, :test do
   # filesystem watcher (the non-polling, only-right way)
   gem 'listen', '>= 3.0.5', '< 3.2'

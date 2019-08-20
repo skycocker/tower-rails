@@ -8,8 +8,9 @@ Rails.application.routes.draw do
   # api resources
   resources :task_lists do
     resources :tasks do
-      post '/complete',   action: :complete
-      post '/uncomplete', action: :uncomplete
+      post '/complete',        action: :complete
+      post '/uncomplete',      action: :uncomplete
+      post '/change_position', action: :change_position
     end
   end
 end

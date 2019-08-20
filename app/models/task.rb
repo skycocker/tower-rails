@@ -4,6 +4,13 @@ class Task < ApplicationRecord
   validates :task_list, presence: true
   validates :content,   presence: true, length: { maximum: 255 }
 
+  acts_as_list(
+    scope:       :task_list,
+    column:      :list_position,
+    add_new_at:  :top,
+    top_of_list: 0,
+  )
+
   def complete!
     update!(completed_at: DateTime.current)
   end

@@ -70,6 +70,16 @@ class TasksController < ApiController
     end
   end
 
+  api :POST, '/task_lists/:task_list_id/tasks/:task_id/change_position', 'Changes the item position to the provided value'
+  param :task_list_id,  :number
+  param :task_id,       :number
+  param :list_position, :number
+  def change_position
+    task.insert_at!(params[:list_position].to_i)
+
+    return head(204)
+  end
+
   api :DELETE, '/task_lists/:task_list_id/tasks/:id', 'Destroys the given task'
   param :task_list_id, :number
   param :id,           :number
