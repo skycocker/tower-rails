@@ -4,7 +4,7 @@ class TaskListsController < ApiController
   api :GET, '/task_lists', 'Returns current user task lists'
   param :page, :number, 'Starts from 1. Will return items in bulks of 25, starting from the most recent.'
   def index
-    render json: current_user.task_lists.order('id asc').page(params[:page])
+    render json: current_user.task_lists.order('list_position asc, id asc').page(params[:page])
   end
 
   api :GET, '/task_lists/:id', 'Returns given task list details'
@@ -43,6 +43,14 @@ class TaskListsController < ApiController
     end
   end
 
+  api :POST, '/task_lists/:task_list_id/change_position', 'Changes the list position to the provided value'
+  param :id,            :number
+  param :list_position, :number
+  def change_position
+    task_list.insert_at!(params[:list_position].to_i)
+    head(204)
+  end
+
   api :DELETE, '/task_lists/:id', 'Destroys given task list'
   param :id, :number
   def destroy
@@ -57,6 +65,6 @@ class TaskListsController < ApiController
   end
 
   def task_list
-    current_user.task_lists.find(params[:id])
+    current_user.task_lists.find(params[:task_list_id] || params[:id])
   end
 end

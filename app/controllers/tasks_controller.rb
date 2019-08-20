@@ -76,8 +76,7 @@ class TasksController < ApiController
   param :list_position, :number
   def change_position
     task.insert_at!(params[:list_position].to_i)
-
-    return head(204)
+    head(204)
   end
 
   api :DELETE, '/task_lists/:task_list_id/tasks/:id', 'Destroys the given task'
