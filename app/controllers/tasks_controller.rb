@@ -5,7 +5,7 @@ class TasksController < ApiController
   param :task_list_id, :number
   param :page, :number, 'Starts from 1. Will return items in bulks of 25, starting from the most recent.'
   def index
-    render json: task_list.tasks.order('id asc').page(params[:page])
+    render json: task_list.tasks.order('list_position asc, id asc').page(params[:page])
   end
 
   api :GET, '/task_lists/:task_list_id/tasks/:id', 'Returns requested task details'
