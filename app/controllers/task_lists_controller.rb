@@ -2,9 +2,8 @@ class TaskListsController < ApiController
   before_action :authenticate_user!
 
   api :GET, '/task_lists', 'Returns current user task lists'
-  param :page, :number, 'Starts from 1. Will return items in bulks of 25, starting from the most recent.'
   def index
-    render json: current_user.task_lists.order('list_position asc, id asc').page(params[:page])
+    render json: current_user.task_lists.order('list_position asc, id asc')
   end
 
   api :GET, '/task_lists/:id', 'Returns given task list details'
