@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190820020314) do
+ActiveRecord::Schema.define(version: 20191024195931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,7 +62,9 @@ ActiveRecord::Schema.define(version: 20190820020314) do
     t.json "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "fcm_token"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["fcm_token"], name: "index_users_on_fcm_token"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end

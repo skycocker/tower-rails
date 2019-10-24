@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   apipie
 
   # api resources
+  resource :me, only: %i(update)
+
   resources :task_lists do
     post '/change_position', action: :change_position
 
