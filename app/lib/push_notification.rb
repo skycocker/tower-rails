@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PushNotification
   attr_reader :fcm_server_key, :users, :title, :content
 
@@ -14,7 +16,9 @@ class PushNotification
         alert: {
           title: title,
           body:  content,
+          sound: 'default',
         },
+        sound: 'default',
       },
       notification: {
         title: title,
