@@ -10,6 +10,12 @@ class PushNotification
 
   def send
     fcm.send(users.pluck(:fcm_token), {
+      aps: {
+        alert: {
+          title: title,
+          body:  content,
+        },
+      },
       notification: {
         title: title,
         body:  content,
