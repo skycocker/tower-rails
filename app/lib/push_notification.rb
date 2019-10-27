@@ -1,28 +1,21 @@
 # frozen_string_literal: true
 
 class PushNotification
-  attr_reader :fcm_server_key, :users, :title, :content
+  attr_reader :users, :title, :content
 
-  def initialize(fcm_server_key:, users:, title:, content:)
-    @users   = users
-    @title   = title
-    @content = content
-    @fcm_server_key = fcm_server_key
+  def initialize(user_ids:, title:, content:)
+    @user_ids = user_ids
+    @title    = title
+    @content  = content
   end
 
   def send
-    fcm.send(users.pluck(:fcm_token), {
+    fcm.send(User.find(user_ids).pluck(:fcm_token), {
       aps: {
         alert: {
           title: title,
           body:  content,
-          sound: 'default',
         },
-        sound: 'default',
-      },
-      notification: {
-        title: title,
-        body:  content,
       },
     })
   end
@@ -30,6 +23,6 @@ class PushNotification
   private
 
   def fcm
-    @fcm = FCM.new(fcm_server_key)
+    @fcm = FCM.new(ENV['fcm_server_key'])
   end
 end
