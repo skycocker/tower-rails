@@ -17,6 +17,11 @@ class PushNotification
           body:  content,
         },
       },
+      notification: {
+        title: title,
+        body:  content,
+        sound: 'default',
+      },
     })
   end
 
