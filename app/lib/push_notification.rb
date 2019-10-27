@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PushNotification
-  attr_reader :users, :title, :content
+  attr_reader :user_ids, :title, :content
 
   def initialize(user_ids:, title:, content:)
     @user_ids = user_ids

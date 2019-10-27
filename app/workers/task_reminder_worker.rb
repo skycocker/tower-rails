@@ -17,7 +17,7 @@ class TaskReminderWorker
       user_ids: task.task_list.users.ids,
       title:    task.content,
       content:  task.task_list.name,
-    )
+    ).send
   end
 
   private
