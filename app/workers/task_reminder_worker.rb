@@ -14,9 +14,9 @@ class TaskReminderWorker
     return if task.happens_at < (DateTime.current - 1.minute)
 
     PushNotification.new(
-      task.task_list.users.ids,
-      task.content,
-      task.task_list.name,
+      user_ids: task.task_list.users.ids,
+      title:    task.content,
+      content:  task.task_list.name,
     )
   end
 
