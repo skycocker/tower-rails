@@ -23,6 +23,6 @@ class PushNotification
   private
 
   def fcm
-    @fcm = FCM.new(ENV['fcm_server_key'])
+    @fcm = FCM.new(ENV['FCM_SERVER_KEY'])
   end
 end
