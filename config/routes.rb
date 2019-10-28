@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   apipie
 
   # api resources
-  resource :me, only: %i(update)
+  resource :me, only: %i(update) do
+    post '/register_device', action: :register_device
+  end
 
   resources :task_lists do
     post '/change_position', action: :change_position

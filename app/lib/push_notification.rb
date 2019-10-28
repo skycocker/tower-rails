@@ -10,7 +10,7 @@ class PushNotification
   end
 
   def send
-    fcm.send(User.find(user_ids).pluck(:fcm_token), {
+    fcm.send(UserDevice.where(user_id: user_ids).pluck(:fcm_token), {
       aps: {
         alert: {
           title: title,

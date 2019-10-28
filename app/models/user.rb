@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
 
   has_many :task_list_users
   has_many :task_lists, through: :task_list_users
+  has_many :user_devices
 end

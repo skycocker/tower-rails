@@ -2,18 +2,23 @@ class MesController < ApiController
   before_action :authenticate_user!
 
   def update
-    me = current_user
-
-    if me.update(me_params)
-      render json: current_user
-    else
-      render json: { errors: current_user.errors }, status: :unprocessable_entity
-    end
+    # do nothing, remove me after the app is updated
+    head(204)
   end
 
-  private
+  def register_device
+    if params[:fcm_token].blank?
+      return head(422)
+    end
 
-  def me_params
-    params.require(:me).permit(:fcm_token)
+    device = current_user
+               .user_devices
+               .find_or_create_by(fcm_token: params[:fcm_token])
+
+    if device.save
+      render json: device, status: 200
+    else
+      render json: { errors: device.errors }, status: 422
+    end
   end
 end
