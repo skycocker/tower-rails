@@ -1,6 +1,11 @@
 class MesController < ApiController
   before_action :authenticate_user!
 
+  def update
+    # do nothing, remove me after the app is updated
+    head(204)
+  end
+
   def register_device
     if params[:fcm_token].blank?
       return head(422)
