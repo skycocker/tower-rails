@@ -13,7 +13,11 @@ Rails.application.routes.draw do
   resources :task_lists do
     post '/change_position', action: :change_position
 
-    resources :task_list_users
+    resources :task_list_users, only: %i(index create) do
+      collection do
+        delete '/', action: :destroy
+      end
+    end
 
     resources :tasks do
       post '/complete',        action: :complete

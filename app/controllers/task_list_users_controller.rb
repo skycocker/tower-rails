@@ -32,11 +32,19 @@ class TaskListUsersController < ApiController
     end
   end
 
-  api :DELETE, '/task_lists/:task_list_id/task_list_users/:id', 'Deletes provided user from the list (using the task_list_user_id)'
+  api :DELETE, '/task_lists/:task_list_id/task_list_users', 'Deletes provided user from the list (using the task_list_user_id)'
   param :task_list_id, :number
-  param :id,           :number
   def destroy
-    task_list.task_list_users.find(params[:id]).destroy!
+    if (params[:email] =~ Devise.email_regexp).blank?
+      return render json: { errors: ['invalid email format'] }, status: :unprocessable_entity
+    end
+
+    task_list.task_list_users
+             .joins(:user)
+             .where(users: { email: params[:email] })
+             .first
+             .destroy!
+
     head(:no_content)
   end
 
