@@ -11,13 +11,33 @@ class TaskListUsersController < ApiController
   param :task_list_id, :number
   param :email, String
   def create
-    new_user = task_list.users.find_or_initialize_by(email: params[:email])
+    if (params[:email] =~ Devise.email_regexp).blank?
+      return render json: { errors: ['invalid email format'] }, status: :unprocessable_entity
+    end
+
+    new_user = task_list.task_list_users
+                        .joins(:user)
+                        .where(users: { email: params[:email] })
+                        .first
+
+    if new_user.blank?
+      new_user = task_list.task_list_users
+                          .new(user: User.find_by!(email: params[:email]))
+    end
 
     if new_user.save
-      render json: new_user, status: :created
+      render json: new_user.user, status: :created
     else
       render json: { errors: new_user.errors }, status: :unprocessable_entity
     end
+  end
+
+  api :DELETE, '/task_lists/:task_list_id/task_list_users/:id', 'Deletes provided user from the list (using the task_list_user_id)'
+  param :task_list_id, :number
+  param :id,           :number
+  def destroy
+    task_list.task_list_users.find(params[:id]).destroy!
+    head(:no_content)
   end
 
   private
