@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :task_lists do
     post '/change_position', action: :change_position
 
+    resources :task_list_users
+
     resources :tasks do
       post '/complete',        action: :complete
       post '/uncomplete',      action: :uncomplete
