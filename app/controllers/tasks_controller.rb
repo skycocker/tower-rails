@@ -103,7 +103,7 @@ class TasksController < ApiController
   private
 
   def task_list
-    current_user.task_lists.find(params[:task_list_id])
+    @task_list ||= current_user.task_lists.find(params[:task_list_id])
   end
 
   def task_params
@@ -111,6 +111,6 @@ class TasksController < ApiController
   end
 
   def task
-    task_list.tasks.find(params[:id] || params[:task_id])
+    @task ||= task_list.tasks.find(params[:id] || params[:task_id])
   end
 end
