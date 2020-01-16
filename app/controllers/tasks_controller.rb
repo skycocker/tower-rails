@@ -78,6 +78,20 @@ class TasksController < ApiController
     head(204)
   end
 
+  api :POST, '/task_lists/:task_list_id/tasks/:task_id/move', 'Changes the list the provided task belongs to'
+  param :task_list_id, :number
+  param :task_id,      :number
+  param :new_list_id,  :number
+  def move
+    new_list = current_user.task_lists.find(params[:new_list_id].to_i)
+
+    if task.update(task_list: new_list)
+      render json: task, status: 200
+    else
+      render json: { errors: task.errors }, status: 422
+    end
+  end
+
   api :DELETE, '/task_lists/:task_list_id/tasks/:id', 'Destroys the given task'
   param :task_list_id, :number
   param :id,           :number

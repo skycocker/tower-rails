@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       post '/complete',        action: :complete
       post '/uncomplete',      action: :uncomplete
       post '/change_position', action: :change_position
+      post '/move',            action: :move
     end
   end
 end
