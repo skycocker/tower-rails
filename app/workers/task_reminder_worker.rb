@@ -13,6 +13,8 @@ class TaskReminderWorker
     return if task.happens_at > (DateTime.current + 1.minute)
     return if task.happens_at < (DateTime.current - 1.minute)
 
+    return if task.completed_at.present?
+
     PushNotification.new(
       user_ids: task.task_list.users.ids,
       title:    task.content,

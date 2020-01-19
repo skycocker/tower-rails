@@ -27,6 +27,7 @@ class Task < ApplicationRecord
 
   def schedule_reminder
     return if happens_at.blank?
+    return unless saved_change_to_attribute?('happens_at')
 
     TaskReminderWorker.perform_at(happens_at, id)
   end
