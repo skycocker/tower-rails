@@ -19,6 +19,12 @@ class TaskReminderWorker
       user_ids: task.task_list.users.ids,
       title:    task.content,
       content:  task.task_list.name,
+      data: {
+        task: {
+          task_list_id: task.task_list.id,
+          task_id:      task.id,
+        },
+      },
     ).send
   end
 

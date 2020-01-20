@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 class PushNotification
-  attr_reader :user_ids, :title, :content
+  attr_reader :user_ids, :title, :content, :data
 
-  def initialize(user_ids:, title:, content:)
+  def initialize(user_ids:, title:, content:, data: {})
     @user_ids = user_ids
     @title    = title
     @content  = content
+    @data     = data
   end
 
   def send
@@ -21,6 +22,7 @@ class PushNotification
         title: title,
         body:  content,
         sound: 'default',
+        data:  data,
       },
     })
   end
