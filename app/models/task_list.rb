@@ -1,10 +1,12 @@
 class TaskList < ApplicationRecord
-  validates :name, presence: true
+  strip_attributes only: %i(name)
 
   has_many :task_list_users, dependent: :destroy
   has_many :users, through: :task_list_users
 
   has_many :tasks, dependent: :destroy
+
+  validates :name, presence: true
 
   acts_as_list(
     column:      :list_position,
