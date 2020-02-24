@@ -19,10 +19,12 @@ class PushNotification
         },
       },
       notification: {
-        title: title,
-        body:  content,
-        sound: 'default',
-        data:  data,
+        title:        title,
+        body:         content,
+        sound:        'default',
+        data:         data,
+        badge:        1,
+        click_action: 'task.category',
       },
     })
   end
