@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 class PushNotification
-  attr_reader :user_ids, :title, :content, :data
+  attr_reader :user_ids, :title, :content, :data, :overrides
 
-  def initialize(user_ids:, title:, content:, data: {})
-    @user_ids = user_ids
-    @title    = title
-    @content  = content
-    @data     = data
+  def initialize(user_ids:, title:, content:, data: {}, overrides: {})
+    @user_ids  = user_ids
+    @title     = title
+    @content   = content
+    @data      = data
+    @overrides = overrides
   end
 
   def send
@@ -24,8 +25,7 @@ class PushNotification
         sound:        'default',
         data:         data,
         badge:        1,
-        click_action: 'task.category',
-      },
+      }.merge(overrides),
     })
   end
 

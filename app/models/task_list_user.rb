@@ -7,11 +7,11 @@ class TaskListUser < ApplicationRecord
   validates :task_list, presence: true
   validates :user,      presence: true, uniqueness: { scope: :task_list }
 
-  after_commit :notify_user, on: :create
+  after_create :notify_user
 
   private
 
   def notify_user
-    TaskListInvitationWorker.perform_async(id, user.id, invitor.try(:id))
+    TaskListInvitationWorker.perform_async(task_list.id, user.id, invitor.try(:id))
   end
 end

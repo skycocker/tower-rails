@@ -23,6 +23,7 @@ class TaskListInvitationWorker
       data: {
         task: {
           task_list_id: task_list.id,
+          task_id:      0, # this is a hack in case you didn't notice
         },
       },
     ).send
@@ -32,7 +33,7 @@ class TaskListInvitationWorker
 
   def message
     return DEFAULT_MESSAGE if invitor.blank?
-    "#{DETAILED_MESSAGE} #{invitor.email}"
+    "#{DETAILED_MESSAGE} #{invitor.email}!"
   end
 
   def task_list
