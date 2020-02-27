@@ -22,7 +22,10 @@ class TaskListUsersController < ApiController
 
     if new_user.blank?
       new_user = task_list.task_list_users
-                          .new(user: User.find_by!(email: params[:email]))
+                          .new(
+                            user:    User.find_by!(email: params[:email]),
+                            invitor: current_user,
+                          )
     end
 
     if new_user.save

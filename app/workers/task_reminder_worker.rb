@@ -20,7 +20,6 @@ class TaskReminderWorker
       title:    task.content,
       content:  task.task_list.name,
       data: {
-        category: 'task.category',
         task: {
           task_list_id: task.task_list.id,
           task_id:      task.id,
