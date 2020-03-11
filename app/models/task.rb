@@ -17,6 +17,8 @@ class Task < ApplicationRecord
     top_of_list: 0,
   )
 
+  reverse_geocoded_by :latitude, :longitude
+
   def complete!
     update!(completed_at: DateTime.current)
   end
