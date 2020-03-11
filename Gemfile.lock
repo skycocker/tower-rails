@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/lynndylanhurley/devise_token_auth.git
-  revision: 55fcd1125565f4fd8e8247a28c9e4a981f270ec9
+  revision: 49e7203693b73e06510aeb726ce58291847a9166
   specs:
     devise_token_auth (1.1.3)
       bcrypt (~> 3.0)
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/thoughtbot/paperclip.git
-  revision: 15f85a88394d2d90295527349d9b1460c7d327b0
+  revision: e3f7493b4cc954405a0209d26933830333ae2869
   specs:
     paperclip (6.1.0)
       activemodel (>= 4.2.0)
@@ -63,7 +63,7 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    acts_as_list (1.0.0)
+    acts_as_list (1.0.1)
       activerecord (>= 4.2)
     apipie-rails (0.5.17)
       rails (>= 4.1)
@@ -89,15 +89,14 @@ GEM
     factory_bot_rails (5.1.1)
       factory_bot (~> 5.1.0)
       railties (>= 4.2.0)
-    fcm (0.0.6)
-      httparty (~> 0.10, >= 0.10.0)
+    faraday (0.15.4)
+      multipart-post (>= 1.2, < 3)
+    fcm (0.0.7)
+      faraday (= 0.15.4)
     ffi (1.12.2)
     geocoder (1.6.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    httparty (0.18.0)
-      mime-types (~> 3.0)
-      multi_xml (>= 0.5.2)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     kaminari (1.2.0)
@@ -129,11 +128,11 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.0)
-    multi_xml (0.6.0)
+    multipart-post (2.1.1)
     nio4r (2.5.2)
-    nokogiri (1.10.8)
+    nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
-    oj (3.10.2)
+    oj (3.10.5)
     orm_adapter (0.5.0)
     pg (1.2.2)
     pry (0.12.2)
@@ -144,7 +143,7 @@ GEM
     pry-remote (0.1.8)
       pry (~> 0.9)
       slop (~> 3.0)
-    puma (3.12.2)
+    puma (3.12.4)
     rack (2.2.2)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
@@ -192,7 +191,7 @@ GEM
     rspec-mocks (3.9.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
-    rspec-rails (3.9.0)
+    rspec-rails (3.9.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
