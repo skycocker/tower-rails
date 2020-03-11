@@ -26,4 +26,10 @@ Rails.application.routes.draw do
       post '/move',            action: :move
     end
   end
+
+  resources :notification_requests, only: %i() do
+    collection do
+      post '/tasks', action: :tasks
+    end
+  end
 end
