@@ -70,6 +70,15 @@ gem 'acts_as_list'
 # geolocation for activerecord
 gem 'geocoder'
 
+# deployments
+gem 'capistrano'
+gem 'capistrano-rails'
+gem 'capistrano-passenger'
+gem 'capistrano-rbenv'
+## required for capistrano with ssh_agent disabled
+gem 'bcrypt_pbkdf'
+gem 'ed25519'
+
 group :development, :test do
   # filesystem watcher (the non-polling, only-right way)
   gem 'listen', '>= 3.0.5', '< 3.2'
