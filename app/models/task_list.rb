@@ -5,6 +5,7 @@ class TaskList < ApplicationRecord
   has_many :users, through: :task_list_users
 
   has_many :tasks, dependent: :destroy
+  accepts_nested_attributes_for :tasks
 
   validates :name, presence: true
 
