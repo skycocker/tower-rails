@@ -1,0 +1,8 @@
+development:
+  server_key: some_server_key
+
+test:
+  server_key: some_server_key
+
+production:
+  server_key: some_server_key

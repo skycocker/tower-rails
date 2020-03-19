@@ -32,6 +32,6 @@ class PushNotification
   private
 
   def fcm
-    @fcm = FCM.new(ENV['FCM_SERVER_KEY'])
+    @fcm = FCM.new(Rails.application.config_for(:fcm)['server_key'])
   end
 end
