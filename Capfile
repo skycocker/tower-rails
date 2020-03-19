@@ -38,6 +38,8 @@ require 'capistrano/bundler'
 require 'capistrano/rails/migrations'
 require 'capistrano/passenger'
 require 'capistrano/rbenv'
+require 'capistrano/sidekiq'
+require 'capistrano/sidekiq/monit'
 
 set :rbenv_type, :user
 set :rbenv_ruby, '2.6.5'

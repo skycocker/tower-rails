@@ -75,6 +75,7 @@ gem 'capistrano'
 gem 'capistrano-rails'
 gem 'capistrano-passenger'
 gem 'capistrano-rbenv'
+gem 'capistrano-sidekiq'
 ## required for capistrano with ssh_agent disabled
 gem 'bcrypt_pbkdf'
 gem 'ed25519'
