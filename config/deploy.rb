@@ -16,6 +16,8 @@ append :linked_files, 'config/database.yml', 'config/secrets.yml'
 # Only keep the last 5 releases to save disk space
 set :keep_releases, 5
 
+set :init_system, :systemd
+
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
 
