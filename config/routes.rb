@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   # api docs
   apipie
 
+  post '/send_reset_password_instructions', to: 'reset_password#send_reset_password_instructions'
+  get  '/reset_password',                   to: 'reset_password#reset_password', as: :reset_password
+
   # api resources
   resource :me, only: [] do
     post '/register_device', action: :register_device

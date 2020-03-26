@@ -21,9 +21,20 @@ class TaskListUsersController < ApiController
                         .first
 
     if new_user.blank?
+      target_user = User.find_by(email: params[:email])
+
+      if target_user.blank?
+        target_user = User.create!(
+          email:    params[:email],
+          password: Devise.friendly_token(64),
+        )
+
+        target_user.send_reset_password_instructions
+      end
+
       new_user = task_list.task_list_users
                           .new(
-                            user:    User.find_by!(email: params[:email]),
+                            user:    target_user,
                             invitor: current_user,
                           )
     end

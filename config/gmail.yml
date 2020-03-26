@@ -1,0 +1,11 @@
+development:
+  username: lubieplacki
+  password: lubieplacki
+
+test:
+  username: lubieplacki
+  password: lubieplacki
+
+production:
+  username: lubieplacki
+  password: lubieplacki
