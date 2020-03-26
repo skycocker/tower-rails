@@ -1,11 +1,14 @@
 development:
+  base_host: lubieplacki
   username: lubieplacki
   password: lubieplacki
 
 test:
+  base_host: lubieplacki
   username: lubieplacki
   password: lubieplacki
 
 production:
+  base_host: lubieplacki
   username: lubieplacki
   password: lubieplacki

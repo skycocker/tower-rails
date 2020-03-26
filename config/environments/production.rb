@@ -57,7 +57,7 @@ Rails.application.configure do
   # gmail setup
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_options = {
-    from: Rails.application.secrets.gmail_username,
+    from: Rails.application.config_for(:gmail)['username'],
   }
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
@@ -67,6 +67,8 @@ Rails.application.configure do
     authentication:       'plain',
     enable_starttls_auto: true,
   }
+
+  config.action_mailer.default_url_options = { host: Rails.application.config_for(:gmail)['base_host'] }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
