@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   # api token auth
-  mount_devise_token_auth_for 'User', at: 'auth'
+  mount_devise_token_auth_for 'User', at: 'auth', controllers: {
+    passwords: 'overrides/passwords',
+  }
 
   # api docs
   apipie
