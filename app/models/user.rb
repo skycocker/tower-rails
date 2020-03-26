@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   include DeviseTokenAuth::Concerns::User
 
-  has_many :task_list_users
+  has_many :task_list_users, dependent: :destroy
   has_many :task_lists, through: :task_list_users
   has_many :user_devices
 end
