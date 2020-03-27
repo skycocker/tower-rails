@@ -28,8 +28,6 @@ class TaskListUsersController < ApiController
           email:    params[:email],
           password: Devise.friendly_token(64),
         )
-
-        target_user.send_reset_password_instructions
       end
 
       new_user = task_list.task_list_users
@@ -40,6 +38,8 @@ class TaskListUsersController < ApiController
     end
 
     if new_user.save
+      ResetPasswordInstructionsWorker.perform_async(target_user.id)
+
       render json: new_user.user, status: :created
     else
       render json: { errors: new_user.errors }, status: :unprocessable_entity
