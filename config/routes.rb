@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get  '/reset_password',                   to: 'reset_password#reset_password', as: :reset_password
 
   # api resources
-  resource :me, only: [] do
+  resource :me, only: %i(show update) do
     post '/register_device', action: :register_device
   end
 
