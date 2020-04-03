@@ -8,6 +8,8 @@ class Task < ApplicationRecord
   validates :task_list, presence: true
   validates :content,   presence: true, length: { maximum: 255 }
 
+  before_create :set_list_position
+
   after_commit :schedule_reminder, on: %i(create update)
 
   acts_as_list(
@@ -34,5 +36,9 @@ class Task < ApplicationRecord
     return unless saved_change_to_attribute?('happens_at')
 
     TaskReminderWorker.perform_at(happens_at, id)
+  end
+
+  def set_list_position
+    self.list_position = task_list.tasks.order('list_position desc').first.list_position.next
   end
 end
