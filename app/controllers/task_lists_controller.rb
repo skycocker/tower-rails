@@ -1,15 +1,26 @@
 class TaskListsController < ApiController
+  QUERY_INCLUDES = %w(
+    task_list_users
+    task_list_users.user
+  ).freeze
+
   before_action :authenticate_user!
 
   api :GET, '/task_lists', 'Returns current user task lists'
   def index
-    render json: current_user.task_lists.order('list_position asc, id asc')
+    render(
+      json:    current_user.task_lists.order('list_position asc, id asc'),
+      include: QUERY_INCLUDES,
+    )
   end
 
   api :GET, '/task_lists/:id', 'Returns given task list details'
   param :id, :number
   def show
-    render json: task_list
+    render(
+      json:    task_list,
+      include: QUERY_INCLUDES,
+    )
   end
 
   def_param_group :task_list do
@@ -25,7 +36,7 @@ class TaskListsController < ApiController
     new_list.users << current_user
 
     if new_list.save
-      render json: new_list, status: 201
+      render json: new_list, status: 201, include: QUERY_INCLUDES
     else
       render json: { errors: new_list.errors }, status: 422
     end
@@ -36,7 +47,7 @@ class TaskListsController < ApiController
   param_group :task_list
   def update
     if task_list.update(task_list_params)
-      render json: task_list
+      render json: task_list, include: QUERY_INCLUDES
     else
       render json: { errors: task_list.errors }, status: 422
     end
