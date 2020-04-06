@@ -15,6 +15,7 @@ class Task < ApplicationRecord
     column:      :list_position,
     add_new_at:  :bottom,
     top_of_list: 0,
+    scope: [completed_at: nil],
   )
 
   reverse_geocoded_by :latitude, :longitude
