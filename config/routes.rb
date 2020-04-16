@@ -10,6 +10,13 @@ Rails.application.routes.draw do
   post '/send_reset_password_instructions', to: 'reset_password#send_reset_password_instructions'
   get  '/reset_password',                   to: 'reset_password#reset_password', as: :reset_password
 
+  # disposable token / (QR code) auth
+  resources :disposable_tokens, only: %i(create) do
+    collection do
+      post '/sign_in_with', action: :sign_in_with
+    end
+  end
+
   # api resources
   resource :me, only: %i(show update) do
     post '/register_device', action: :register_device

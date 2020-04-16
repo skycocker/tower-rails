@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200311014405) do
+ActiveRecord::Schema.define(version: 2020_04_16_162520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "disposable_tokens", force: :cascade do |t|
+    t.string "value", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["expires_at"], name: "index_disposable_tokens_on_expires_at"
+    t.index ["value", "expires_at"], name: "index_disposable_tokens_on_value_and_expires_at"
+    t.index ["value"], name: "index_disposable_tokens_on_value"
+  end
 
   create_table "task_list_users", force: :cascade do |t|
     t.integer "task_list_id", null: false
