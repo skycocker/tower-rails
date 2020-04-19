@@ -2,6 +2,7 @@
 
 class Task < ApplicationRecord
   belongs_to :task_list
+  has_many :task_notes
 
   strip_attributes only: %i(content)
 

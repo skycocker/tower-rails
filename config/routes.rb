@@ -32,6 +32,13 @@ Rails.application.routes.draw do
     end
 
     resources :tasks do
+      resources :task_notes do
+        collection do
+          get   '/last', action: :get_last
+          patch '/last', action: :update_last
+        end
+      end
+
       post '/complete',        action: :complete
       post '/uncomplete',      action: :uncomplete
       post '/change_position', action: :change_position
