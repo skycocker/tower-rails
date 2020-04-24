@@ -29,5 +29,8 @@ module Tower
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # http gzip/deflate support
+    config.middleware.use Rack::Deflater
   end
 end
