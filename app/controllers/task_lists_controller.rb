@@ -9,7 +9,7 @@ class TaskListsController < ApiController
   api :GET, '/task_lists', 'Returns current user task lists'
   def index
     render(
-      json:    current_user.task_lists.order('list_position asc, id asc'),
+      json:    current_user.task_lists.includes(task_list_users: :user).order('list_position asc, id asc'),
       include: QUERY_INCLUDES,
     )
   end
