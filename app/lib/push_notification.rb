@@ -20,13 +20,12 @@ class PushNotification
         },
       },
       notification: {
-        title:               title,
-        body:                content,
-        sound:               'default',
-        data:                data,
-        badge:               1,
-        priority:            'high',
-        'content-available': 1,
+        title:             title,
+        body:              content,
+        sound:             'default',
+        data:              data,
+        priority:          'high',
+        content_available: true,
       }.merge(overrides),
     })
   end
