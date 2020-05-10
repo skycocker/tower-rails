@@ -1,10 +1,19 @@
+# frozen_string_literal: true
+
 class TasksController < ApiController
+  QUERY_INCLUDES = %w(
+    task_notes
+  ).freeze
+
   before_action :authenticate_user!
 
   api :GET, '/task_lists/:task_list_id/tasks', 'Returns tasks from requested task list'
   param :task_list_id, :number
   def index
-    render json: task_list.tasks.order('list_position asc, id asc')
+    render(
+      json:    task_list.tasks.includes(QUERY_INCLUDES).order('list_position asc, id asc'),
+      include: QUERY_INCLUDES,
+    )
   end
 
   api :GET, '/task_lists/:task_list_id/tasks/:id', 'Returns requested task details'
@@ -28,7 +37,7 @@ class TasksController < ApiController
   param :task_list_id, :number
   param_group :task
   def create
-    new_task = task_list.tasks.new(task_params)
+    new_task = task_list.tasks.includes(QUERY_INCLUDES).new(task_params)
 
     if new_task.save
       render json: new_task, status: 201
@@ -113,6 +122,6 @@ class TasksController < ApiController
   end
 
   def task
-    @task ||= task_list.tasks.find(params[:id] || params[:task_id])
+    @task ||= task_list.tasks.includes(QUERY_INCLUDES).find(params[:id] || params[:task_id])
   end
 end
