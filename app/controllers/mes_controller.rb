@@ -19,7 +19,7 @@ class MesController < ApiController
     end
   end
 
-  api :POST, '/register_devise', 'Registers a new user device'
+  api :POST, '/register_device', 'Registers a new user device'
   param :fcm_token, String
   def register_device
     if params[:fcm_token].blank?
