@@ -25,9 +25,7 @@ class TaskReminderWorker
           task_id:      task.id,
         },
       },
-      overrides: {
-        click_action: 'task.category',
-      },
+      category: 'task.category',
     ).send
   end
 

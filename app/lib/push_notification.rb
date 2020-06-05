@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 class PushNotification
-  attr_reader :user_ids, :title, :content, :data, :overrides
+  attr_reader :user_ids, :title, :content, :data, :category
 
-  def initialize(user_ids:, title:, content:, data: {}, overrides: {})
+  def initialize(user_ids:, title:, content:, data: {}, category: nil)
     @user_ids  = user_ids
     @title     = title
     @content   = content
     @data      = data
-    @overrides = overrides
+    @category = category
   end
 
   def send
@@ -21,9 +21,12 @@ class PushNotification
       }
 
       notification.topic             = 'com.vomit.Tower'
+      notification.category          = category
       notification.sound             = 'default'
-      notification.custom_payload    = data
+      notification.custom_payload    = { data: data }
       notification.content_available = true
+      notification.badge             = 1
+      notification.priority          = 10
 
       push = apnotic.prepare_push(notification)
 
