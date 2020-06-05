@@ -30,7 +30,11 @@ class PushNotification
 
       push.on(:response) do |response|
         unless response.ok?
-          raise Errors::FailedToDeliver, "Error body: #{response.body}"
+          if response.body['reason'].present? && response.body['reason'] == 'BadDeviceToken'
+            UserDevice.find_by!(fcm_token: token).destroy!
+          else
+            raise Errors::FailedToDeliver, "Error body: #{response.body}"
+          end
         end
       end
 
