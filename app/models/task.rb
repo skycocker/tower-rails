@@ -11,6 +11,7 @@ class Task < ApplicationRecord
 
   after_commit :schedule_reminder, on: %i(create update)
 
+  # TODO the duplicated keys might be a reason behind the reordering issues
   acts_as_list(
     scope:       :task_list,
     column:      :list_position,

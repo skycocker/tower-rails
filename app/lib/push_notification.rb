@@ -30,7 +30,7 @@ class PushNotification
 
       push.on(:response) do |response|
         unless response.ok?
-          raise Errors::FailedToDeliver, "Token: #{token}"
+          raise Errors::FailedToDeliver, "Error body: #{response.body}"
         end
       end
 
