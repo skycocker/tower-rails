@@ -10,7 +10,7 @@ class TaskLocalizationReminderWorker
 
     Task
       .where(task_list_id: user.task_lists.ids, completed_at: nil)
-      .near([latitude, longitude], 0.5, units: :km)
+      .near([latitude, longitude], 0.2, units: :km)
       .each(&method(:send_notification_for))
   end
 

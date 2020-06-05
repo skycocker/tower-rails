@@ -35,10 +35,8 @@ class PushNotification
           if response.body['reason'].present? && response.body['reason'] == 'BadDeviceToken'
             UserDevice.find_by!(fcm_token: token).destroy!
           else
-            raise Errors::FailedToDeliver, "Error body: #{response.body}"
+            Rollbar.warning("Failed to deliver APNS notification: #{response.body}")
           end
-        else
-          puts 'Delivered an APNS notification successfully'
         end
       end
 
@@ -51,6 +49,6 @@ class PushNotification
   private
 
   def apnotic
-    @apnotic ||= Apnotic::Connection.development(cert_path: Rails.root.join(*%w(config aps.p12)))
+    @apnotic ||= Apnotic::Connection.new(cert_path: Rails.root.join(*%w(config aps.p12)))
   end
 end
