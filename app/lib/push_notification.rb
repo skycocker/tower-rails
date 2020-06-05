@@ -24,8 +24,6 @@ class PushNotification
       notification.sound             = 'default'
       notification.custom_payload    = data
       notification.content_available = true
-      notification.badge             = 1
-      notification.priority          = 10
 
       push = apnotic.prepare_push(notification)
 
@@ -36,6 +34,8 @@ class PushNotification
           else
             raise Errors::FailedToDeliver, "Error body: #{response.body}"
           end
+        else
+          puts 'Delivered an APNS notification successfully'
         end
       end
 
