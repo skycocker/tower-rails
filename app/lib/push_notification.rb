@@ -48,10 +48,6 @@ class PushNotification
   private
 
   def apnotic
-    @apnotic ||= begin
-      conn = Apnotic::Connection.new(cert_path: Rails.root.join(*%w(config aps.p12)))
-      conn.on(:error) { |exception| puts "Exception has been raised: #{exception}" }
-      conn
-    end
+    @apnotic ||= Apnotic::Connection.development(cert_path: Rails.root.join(*%w(config aps.p12)))
   end
 end
