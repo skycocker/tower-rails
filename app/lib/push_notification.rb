@@ -12,27 +12,37 @@ class PushNotification
   end
 
   def send
-    fcm.send(UserDevice.where(user_id: user_ids).pluck(:fcm_token), {
-      aps: {
-        alert: {
-          title: title,
-          body:  content,
-        },
-      },
-      notification: {
-        title:             title,
-        body:              content,
-        sound:             'default',
-        data:              data,
-        priority:          'high',
-        content_available: true,
-      }.merge(overrides),
-    })
+    UserDevice.where(user_id: user_ids).pluck(:fcm_token).each do |token|
+      notification = Apnotic::Notification.new(token)
+
+      notification.alert = {
+        title: title,
+        body:  content,
+      }
+
+      notification.sound             = 'default'
+      notification.custom_payload    = data
+      notification.content_available = true
+      notification.badge             = 1
+      notification.priority          = 10
+
+      push = apnotic.prepare_push(notification)
+
+      push.on(:response) do |response|
+        unless response.ok?
+          raise Errors::FailedToDeliver, "Token: #{token}"
+        end
+      end
+
+      apnotic.push_async(push)
+      apnotic.join
+      apnotic.close
+    end
   end
 
   private
 
-  def fcm
-    @fcm = FCM.new(Rails.application.config_for(:fcm)['server_key'])
+  def apnotic
+    @apnotic ||= Apnotic::Connection.new(cert_path: Rails.root.join(*%w(config aps.p12)))
   end
 end

@@ -49,7 +49,7 @@ gem 'kaminari'
 gem 'apipie-rails'
 
 # push notifications
-gem 'fcm'
+gem 'apnotic'
 
 # testing
 gem 'rspec-rails'
