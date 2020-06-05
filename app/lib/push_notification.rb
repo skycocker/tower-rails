@@ -20,6 +20,7 @@ class PushNotification
         body:  content,
       }
 
+      notification.topic             = 'com.vomit.Tower'
       notification.sound             = 'default'
       notification.custom_payload    = data
       notification.content_available = true
