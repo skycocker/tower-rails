@@ -49,7 +49,7 @@ gem 'kaminari'
 gem 'apipie-rails'
 
 # push notifications
-gem 'apnotic'
+gem 'apnotic', github: 'collectiveidea/apnotic', branch: 'background-fix'
 
 # testing
 gem 'rspec-rails'
