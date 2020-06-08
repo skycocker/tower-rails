@@ -20,12 +20,12 @@ class PushNotification
         body:  content,
       }
 
-      notification.topic             = 'com.vomit.Tower'
-      notification.category          = category
-      notification.sound             = 'default'
-      notification.custom_payload    = { data: data }
-      notification.content_available = 1
-      notification.priority          = 10
+      notification.topic          = 'com.vomit.Tower'
+      notification.category       = category
+      notification.sound          = 'default'
+      notification.custom_payload = { data: data }
+      notification.priority       = 10
+      notification.badge          = 1
 
       push = apnotic.prepare_push(notification)
 
