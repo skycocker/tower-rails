@@ -1,13 +1,4 @@
 GIT
-  remote: https://github.com/collectiveidea/apnotic.git
-  revision: f7e4eb408c9f63498b1805a0ef2ac7bae55e8778
-  branch: background-fix
-  specs:
-    apnotic (1.6.0)
-      connection_pool (~> 2)
-      net-http2 (>= 0.18, < 2)
-
-GIT
   remote: https://github.com/lynndylanhurley/devise_token_auth.git
   revision: 275da3c1960b60adf9c49adfff15725a7c60faf9
   specs:
@@ -82,6 +73,9 @@ GEM
       sshkit (>= 1.6.1, != 1.7.0)
     apipie-rails (0.5.17)
       rails (>= 4.1)
+    apnotic (1.6.0)
+      connection_pool (~> 2)
+      net-http2 (>= 0.18, < 2)
     arel (9.0.0)
     awesome_print (1.8.0)
     bcrypt (3.1.13)
@@ -282,7 +276,7 @@ DEPENDENCIES
   active_model_serializers (= 0.10.0.rc4)
   acts_as_list
   apipie-rails
-  apnotic!
+  apnotic
   awesome_print
   bcrypt_pbkdf
   capistrano
