@@ -62,7 +62,7 @@ gem 'spin'
 gem 'rollbar'
 
 # webserver
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 3.12'
 
 # reorderable/sortable lists
 gem 'acts_as_list'
