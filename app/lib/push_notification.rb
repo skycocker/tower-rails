@@ -24,7 +24,7 @@ class PushNotification
       notification.category          = category
       notification.sound             = 'default'
       notification.custom_payload    = { data: data }
-      notification.content_available = true
+      notification.content_available = 1
       notification.priority          = 10
 
       push = apnotic.prepare_push(notification)
