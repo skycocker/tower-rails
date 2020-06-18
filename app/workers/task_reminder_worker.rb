@@ -9,6 +9,7 @@ class TaskReminderWorker
     @task_id = task_id
 
     return if task.blank?
+    return if task.happens_at.blank?
 
     return if task.happens_at > (DateTime.current + 1.minute)
     return if task.happens_at < (DateTime.current - 1.minute)
