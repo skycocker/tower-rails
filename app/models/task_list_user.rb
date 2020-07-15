@@ -12,6 +12,9 @@ class TaskListUser < ApplicationRecord
   private
 
   def notify_user
+    return if user.id == invitor.try(:id)
+    return if invitor.blank?
+
     TaskListInvitationWorker.perform_async(task_list.id, user.id, invitor.try(:id))
   end
 end
