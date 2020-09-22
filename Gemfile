@@ -38,9 +38,7 @@ gem 'oj'
 gem 'paperclip', github: 'thoughtbot/paperclip'
 
 # api model serialization
-# specific version because of devise_token_auth conflict
-# happening otherwise
-gem 'active_model_serializers', '0.10.0.rc4'
+gem 'panko_serializer'
 
 # pagination
 gem 'kaminari'

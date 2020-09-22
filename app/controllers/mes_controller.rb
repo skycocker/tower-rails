@@ -3,7 +3,7 @@ class MesController < ApiController
 
   api :GET, '/me', 'Returns current_user object'
   def show
-    render json: current_user
+    render json: UserSerializer.new.serialize_to_json(current_user)
   end
 
   api :PATCH, '/me', 'Updates current_user object'
@@ -13,7 +13,7 @@ class MesController < ApiController
     user = User.find(current_user.id)
 
     if user.update(user_params)
-      render json: user, status: :ok
+      render json: UserSerializer.new.serialize_to_json(user), status: :ok
     else
       render json: { errors: user.errors }, status: :unprocessable_entity
     end

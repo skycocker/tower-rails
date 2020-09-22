@@ -11,8 +11,10 @@ class TasksController < ApiController
   param :task_list_id, :number
   def index
     render(
-      json:    task_list.tasks.includes(QUERY_INCLUDES).order('list_position asc, id asc'),
-      include: QUERY_INCLUDES,
+      json: Panko::ArraySerializer.new(
+        task_list.tasks.includes(QUERY_INCLUDES).order('list_position asc, id asc'),
+        each_serializer: TaskSerializer,
+      ).to_json,
     )
   end
 
@@ -20,7 +22,7 @@ class TasksController < ApiController
   param :task_list_id, :number
   param :id,           :number
   def show
-    render json: task_list.tasks.find(params[:id])
+    render json: TaskSerializer.new.serialize_to_json(task_list.tasks.find(params[:id]))
   end
 
   def_param_group :task do
@@ -40,7 +42,7 @@ class TasksController < ApiController
     new_task = task_list.tasks.includes(QUERY_INCLUDES).new(task_params)
 
     if new_task.save
-      render json: new_task, status: 201
+      render json: TaskSerializer.new.serialize_to_json(new_task), status: 201
     else
       render json: { errors: new_task.errors }, status: 422
     end
@@ -52,7 +54,7 @@ class TasksController < ApiController
   param_group :task
   def update
     if task.update(task_params)
-      render json: task, status: 200
+      render json: TaskSerializer.new.serialize_to_json(task), status: 200
     else
       render json: { errors: task.errors }, status: 422
     end
@@ -97,7 +99,7 @@ class TasksController < ApiController
     new_list = current_user.task_lists.find(params[:new_list_id].to_i)
 
     if task.update(task_list: new_list)
-      render json: task, status: 200
+      render json: TaskSerializer.new.serialize_to_json(task), status: 200
     else
       render json: { errors: task.errors }, status: 422
     end

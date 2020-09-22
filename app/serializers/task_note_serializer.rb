@@ -1,3 +1,3 @@
-class TaskNoteSerializer < ActiveModel::Serializer
+class TaskNoteSerializer < Panko::Serializer
   attributes :id, :task_id, :content
 end

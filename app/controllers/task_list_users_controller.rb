@@ -4,7 +4,7 @@ class TaskListUsersController < ApiController
   api :GET, '/task_lists/:task_list_id/task_list_users', 'Returns users associated to the requested task list'
   param :task_list_id, :number
   def index
-    render json: task_list.users
+    render json: Panko::ArraySerializer.new(task_list.users, each_serializer: TaskListUserSerializer).to_json
   end
 
   api :POST, '/task_lists/:task_list_id/task_list_users', 'Adds a new user to the list (using a provided email address)'
@@ -40,7 +40,7 @@ class TaskListUsersController < ApiController
     end
 
     if new_user.save
-      render json: new_user.user, status: :created
+      render json: TaskListUserSerializer.new.serialize_to_json(new_user.user), status: :created
     else
       render json: { errors: new_user.errors }, status: :unprocessable_entity
     end

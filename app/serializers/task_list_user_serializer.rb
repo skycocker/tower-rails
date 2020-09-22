@@ -1,6 +1,6 @@
-class TaskListUserSerializer < ActiveModel::Serializer
+class TaskListUserSerializer < Panko::Serializer
   attributes :id, :task_list_id,
              :created_at, :updated_at
 
-  belongs_to :user
+  has_one :user, serializer: UserSerializer
 end

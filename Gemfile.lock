@@ -58,10 +58,6 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    active_model_serializers (0.10.0.rc4)
-      actionpack (>= 4.0)
-      activemodel (>= 4.0)
-      railties (>= 4.0)
     activejob (6.0.3.2)
       activesupport (= 6.0.3.2)
       globalid (>= 0.3.6)
@@ -179,6 +175,8 @@ GEM
       mini_portile2 (~> 2.4.0)
     oj (3.10.7)
     orm_adapter (0.5.0)
+    panko_serializer (0.7.3)
+      oj (~> 3.10.0)
     pg (1.2.3)
     pry (0.13.1)
       coderay (~> 1.1)
@@ -286,7 +284,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers (= 0.10.0.rc4)
   acts_as_list
   apipie-rails
   apnotic
@@ -304,6 +301,7 @@ DEPENDENCIES
   kaminari
   listen (>= 3.0.5, < 3.2)
   oj
+  panko_serializer
   paperclip!
   pg (>= 0.18, < 2.0)
   pry-rails

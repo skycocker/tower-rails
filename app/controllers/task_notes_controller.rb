@@ -5,7 +5,7 @@ class TaskNotesController < ApiController
   param :task_list_id, :number
   param :task_id,      :number
   def get_last
-    render json: task_note
+    render json: TaskNoteSerializer.new.serialize_to_json(task_note)
   end
 
   api :PATCH, '/task_lists/:task_list_id/tasks/:task_id/task_notes/last', 'Updates the last task note belonging to the requested task'
@@ -15,7 +15,7 @@ class TaskNotesController < ApiController
     task_note.assign_attributes(task_note_params)
 
     if task_note.save
-      render json: task_note, status: :ok
+      render json: TaskNoteSerializer.new.serialize_to_json(task_note), status: :ok
     else
       render json: { errors: task_note.errors }, status: :unprocessable_entity
     end

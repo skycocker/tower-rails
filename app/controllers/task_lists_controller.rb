@@ -9,8 +9,10 @@ class TaskListsController < ApiController
   api :GET, '/task_lists', 'Returns current user task lists'
   def index
     render(
-      json:    current_user.task_lists.includes(task_list_users: :user).order('list_position asc, id asc'),
-      include: QUERY_INCLUDES,
+      json: Panko::ArraySerializer.new(
+        current_user.task_lists.includes(task_list_users: :user).order('list_position asc, id asc'),
+        each_serializer: TaskListSerializer,
+      ).to_json,
     )
   end
 
@@ -18,7 +20,7 @@ class TaskListsController < ApiController
   param :id, :number
   def show
     render(
-      json:    task_list,
+      json:    TaskListSerializer.new.serialize_to_json(task_list),
       include: QUERY_INCLUDES,
     )
   end
@@ -36,7 +38,7 @@ class TaskListsController < ApiController
     new_list.users << current_user
 
     if new_list.save
-      render json: new_list, status: 201, include: QUERY_INCLUDES
+      render json: TaskListSerializer.new.serialize_to_json(new_list), status: 201, include: QUERY_INCLUDES
     else
       render json: { errors: new_list.errors }, status: 422
     end
@@ -47,7 +49,7 @@ class TaskListsController < ApiController
   param_group :task_list
   def update
     if task_list.update(task_list_params)
-      render json: task_list, include: QUERY_INCLUDES
+      render json: TaskListSerializer.new.serialize_to_json(task_list), include: QUERY_INCLUDES
     else
       render json: { errors: task_list.errors }, status: 422
     end

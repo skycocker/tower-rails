@@ -1,4 +1,4 @@
-class TaskSerializer < ActiveModel::Serializer
+class TaskSerializer < Panko::Serializer
   attributes :id, :task_list_id, :content,
              :list_position, :notes_present,
              :happens_at, :completed_at,
