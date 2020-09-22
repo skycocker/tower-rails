@@ -5,12 +5,23 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  <<: *default
-  database: tower_development
+  primary:
+    <<: *default
+    database: tower_development
+  primary_replica:
+    <<: *default
+    database: tower_development
 
 test:
-  <<: *default
-  database: tower_test
+  primary:
+    <<: *default
+    database: tower_test
+  primary_replica:
+    <<: *default
+    database: tower_test
 
 production:
-  url: <%= ENV['DATABASE_URL'] %>
+  primary:
+    url: <%= ENV['DATABASE_URL'] %>
+  primary_replica:
+    url: <%= ENV['DATABASE_URL'] %>
