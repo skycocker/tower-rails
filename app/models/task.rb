@@ -22,6 +22,8 @@ class Task < ApplicationRecord
 
   reverse_geocoded_by :latitude, :longitude
 
+  scope :pending, -> { where(completed_at: nil) }
+
   def complete!
     update!(completed_at: DateTime.current)
   end
