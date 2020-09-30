@@ -40,7 +40,7 @@ class TaskListUsersController < ApiController
     end
 
     if new_user.save
-      render json: TaskListUserSerializer.new.serialize_to_json(new_user.user), status: :created
+      render json: UserSerializer.new.serialize_to_json(new_user.user), status: :created
     else
       render json: { errors: new_user.errors }, status: :unprocessable_entity
     end
