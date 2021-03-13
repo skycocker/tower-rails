@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   # api docs
   apipie
 
+  root to: proc { [204, {}, ['']] }
+
   post '/send_reset_password_instructions', to: 'reset_password#send_reset_password_instructions'
   get  '/reset_password',                   to: 'reset_password#reset_password', as: :reset_password
 
