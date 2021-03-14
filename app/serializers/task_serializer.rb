@@ -8,6 +8,6 @@ class TaskSerializer < Panko::Serializer
   def notes_present
     return false if object.task_notes.blank?
 
-    object.task_notes.any? { |note| note.content.present? }
+    object.task_notes.any? { |note| Nokogiri::HTML.parse(note.content).text.present? }
   end
 end
